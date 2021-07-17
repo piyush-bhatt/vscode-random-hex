@@ -1,4 +1,11 @@
+import * as vscode from 'vscode';
+
 const GOLDEN_RATIO = 0.618033988749895;
+
+export enum FormatType {
+  fillRandomHexColorCode = 'fillRandomHexColorCode',
+  fillUniqueRandomHexColorCode = 'fillUniqueRandomHexColorCode',
+}
 
 const randomSeed = () => Math.random();
 
@@ -65,3 +72,20 @@ const getRandomRgb = () => {
 const rgbToHex = (rgb: number[]) => `#${rgb.map((val) => padHex(val.toString(16))).join('')}`;
 
 export const getRandomHex = () => rgbToHex(getRandomRgb());
+
+export const processSelection = (formatType: FormatType) => {
+  const e = vscode.window.activeTextEditor;
+  if (e) {
+    const d = e.document;
+    const sel = e.selections;
+
+    e.edit((edit) => {
+      const randomHex = getRandomHex();
+      for (let x = 0; x < sel.length; x++) {
+        let selectedTxt: string = d.getText(new vscode.Range(sel[x].start, sel[x].end));
+        selectedTxt = formatType === FormatType.fillUniqueRandomHexColorCode ? getRandomHex() : randomHex;
+        edit.insert(sel[x].start, selectedTxt);
+      }
+    });
+  }
+};
