@@ -10,14 +10,24 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:vscode-random-hex.generateRandomHexCode"
+    "onCommand:vscode-random-hex.generateRandomHexColorCode",
+    "onCommand:vscode-random-hex.fillRandomHexColorCode",
+    "onCommand:vscode-random-hex.fillUniqueRandomHexColorCode"
   ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "vscode-random-hex.generateRandomHexCode",
-        "title": "Random Hex Color Code"
+        "command": "vscode-random-hex.generateRandomHexColorCode",
+        "title": "Random Hex color code"
+      },
+      {
+        "command": "vscode-random-hex.fillRandomHexColorCode",
+        "title": "Fill random Hex color code in selection(s)"
+      },
+      {
+        "command": "vscode-random-hex.fillUniqueRandomHexColorCode",
+        "title": "Fill unique random Hex color code in selection(s)"
       }
     ]
   },
