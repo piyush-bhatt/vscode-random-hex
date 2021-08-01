@@ -9,10 +9,13 @@
 ## Features
 
 Execute **`Random Hex`** commands from the VSCode command palette
+
 - [**Random Hex: Generate random color code:**](#generate-random-hex- 'Jump to Generate random color code') Generates a random hex color code and copies it to clipboard
 - [**Random Hex: Fill random color code in selection(s):**](#fill-random-hex- 'Jump to Fill random color code in selection(s)') Fills in a random hex color code in all the active selections. The same code is filled in all the selections.
 - [**Random Hex: Fill random color code uniquely in selection(s):**](#fill-random-hex-unique- 'Jump to Fill random color code uniquely in selection(s)') Fills in a random hex color code uniquely in all the active selections. Differnet code is filled in each of the selections.
-- **Random Hex: Set default config:** Sets default values to *golden ratio*, *saturation* and *value*.
+- **Random Hex: Set default config:** Sets default values to _golden ratio_, _saturation_ and _value_.
+
+> **NOTE:** Golden Ratio, Saturation and Value can be change in Random Hex Code settings.
 
 ## Usage
 
