@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { FormatType, getRandomHex, processSelection } from './utils';
+import { FormatType, getRandomHex, processSelection, setDefaultConfig } from './utils';
 
 export function activate(context: vscode.ExtensionContext) {
   const generateRandomHexColorCode = vscode.commands.registerCommand(
@@ -22,7 +22,16 @@ export function activate(context: vscode.ExtensionContext) {
     },
   );
 
-  context.subscriptions.push(generateRandomHexColorCode, fillRandomHexColorCode, fillUniqueRandomHexColorCode);
+  const defaultConfig = vscode.commands.registerCommand('vscode-random-hex.setDefaultConfig', () => {
+    setDefaultConfig();
+  });
+
+  context.subscriptions.push(
+    generateRandomHexColorCode,
+    fillRandomHexColorCode,
+    fillUniqueRandomHexColorCode,
+    defaultConfig,
+  );
 }
 
 export function deactivate() {}

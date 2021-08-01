@@ -12,22 +12,44 @@
   "activationEvents": [
     "onCommand:vscode-random-hex.generateRandomHexColorCode",
     "onCommand:vscode-random-hex.fillRandomHexColorCode",
-    "onCommand:vscode-random-hex.fillUniqueRandomHexColorCode"
+    "onCommand:vscode-random-hex.fillUniqueRandomHexColorCode",
+    "onCommand:vscode-random-hex.setDefaultConfig"
   ],
   "main": "./dist/extension.js",
   "contributes": {
+    "configuration": {
+      "title": "Randome Hex Code",
+      "properties": {
+        "vscode-random-hex.goldenRatio": {
+          "type": "number",
+          "default": 0.618033988749895
+        },
+        "vscode-random-hex.saturation": {
+          "type": "number",
+          "default": 0.5
+        },
+        "vscode-random-hex.value": {
+          "type": "number",
+          "default": 0.95
+        }
+      }
+    },
     "commands": [
       {
         "command": "vscode-random-hex.generateRandomHexColorCode",
-        "title": "Random Hex color code"
+        "title": "Random Hex: Generate random color code"
       },
       {
         "command": "vscode-random-hex.fillRandomHexColorCode",
-        "title": "Fill random Hex color code in selection(s)"
+        "title": "Random Hex: Fill random color code in selection(s)"
       },
       {
         "command": "vscode-random-hex.fillUniqueRandomHexColorCode",
-        "title": "Fill unique random Hex color code in selection(s)"
+        "title": "Random Hex: Fill random color code uniquely in selection(s)"
+      },
+      {
+        "command": "vscode-random-hex.setDefaultConfig",
+        "title": "Random Hex: Set default config"
       }
     ]
   },

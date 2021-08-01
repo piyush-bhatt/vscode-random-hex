@@ -1,6 +1,5 @@
 import * as vscode from 'vscode';
-
-const GOLDEN_RATIO = 0.618033988749895;
+import { GOLDEN_RATIO, SATURATION, VALUE } from './constants';
 
 export enum FormatType {
   fillRandomHexColorCode = 'fillRandomHexColorCode',
@@ -54,15 +53,17 @@ const hsvToRgb = (h: number, s: number, v: number) => {
   return [Math.floor(r * 255), Math.floor(g * 255), Math.floor(b * 255)];
 };
 
-const getSaturation = () => 0.5;
+const getGoldenRatio = () => vscode.workspace.getConfiguration('vscode-random-hex').get('goldenRatio', GOLDEN_RATIO);
 
-const getValue = () => 0.95;
+const getSaturation = () => vscode.workspace.getConfiguration('vscode-random-hex').get('saturation', SATURATION);
+
+const getValue = () => vscode.workspace.getConfiguration('vscode-random-hex').get('value', VALUE);
 
 const padHex = (val: string) => (val.length > 2 ? val : new Array(2 - val.length + 1).join('0') + val);
 
 const getRandomRgb = () => {
   const { hue, saturation, value } = {
-    hue: (randomSeed() + GOLDEN_RATIO) % 1,
+    hue: (randomSeed() + getGoldenRatio()) % 1,
     saturation: getSaturation(),
     value: getValue(),
   };
@@ -88,4 +89,14 @@ export const processSelection = (formatType: FormatType) => {
       }
     });
   }
+};
+
+export const setDefaultConfig = () => {
+  vscode.workspace
+    .getConfiguration()
+    .update('vscode-random-hex.goldenRatio', GOLDEN_RATIO, vscode.ConfigurationTarget.Global);
+  vscode.workspace
+    .getConfiguration()
+    .update('vscode-random-hex.saturation', SATURATION, vscode.ConfigurationTarget.Global);
+  vscode.workspace.getConfiguration().update('vscode-random-hex.value', VALUE, vscode.ConfigurationTarget.Global);
 };
